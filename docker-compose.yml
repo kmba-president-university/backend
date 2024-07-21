@@ -19,17 +19,17 @@ services:
     networks:
       - mynetwork
 
-  dev_phpmyadmin:
-    image: phpmyadmin:latest
-    restart: always
-    ports:
-      - 5040:80
-    environment:
-      - PMA_ARBITRARY=1
-    depends_on:
-      - dev_server
-    networks:
-      - mynetwork
+  # dev_phpmyadmin:
+  #   image: phpmyadmin:latest
+  #   restart: always
+  #   ports:
+  #     - 5040:80
+  #   environment:
+  #     - PMA_ARBITRARY=1
+  #   depends_on:
+  #     - dev_server
+  #   networks:
+  #     - mynetwork
 
   express-app:
     build:
