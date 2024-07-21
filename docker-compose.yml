@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  php-env:
+    build: .
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 5050:80
+
+  dev_server:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: satuperxdx
+
+  dev_phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 5040:80
+    environment:
+      - PMA_ARBITRARY=1
+
+  express-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    depends_on:
+      - dev_server
