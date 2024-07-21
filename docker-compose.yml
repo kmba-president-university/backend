@@ -12,6 +12,7 @@ services:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
+
   app:
     depends_on:
       - mysqldb
@@ -28,6 +29,18 @@ services:
       - DB_PORT=$MYSQLDB_DOCKER_PORT
     stdin_open: true
     tty: true
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 5040:80
+    environment:
+      - PMA_HOST=mysqldb
+      - PMA_USER=$MYSQLDB_USER
+      - PMA_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+    depends_on:
+      - mysqldb
 
 volumes:
   db:
